@@ -14,20 +14,29 @@ export default class GeneralInfo extends React.Component {
           />
         </label>
         <label>
-          E-Mail:
+          Headline:
           <input
-            name="inputEmail"
+            name="inputHeadline"
             type="email"
-            value={this.props.inputEmail}
+            value={this.props.inputHeadline}
             onChange={this.handleChange}
           />
         </label>
         <label>
-          Phone Number:
+          School:
           <input
-            name="inputPhoneNumber"
+            name="inputSchool"
             type="tel"
-            value={this.props.inputPhoneNumber}
+            value={this.props.inputSchool}
+            onChange={this.handleChange}
+          />
+        </label>
+        <label>
+          Location:
+          <input
+            name="inputLocation"
+            type="tel"
+            value={this.props.inputLocation}
             onChange={this.handleChange}
           />
         </label>

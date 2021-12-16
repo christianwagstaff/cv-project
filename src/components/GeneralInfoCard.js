@@ -21,6 +21,15 @@ const Location = (props) => {
   return <div className="location">{props.location}</div>;
 };
 export default class GenInfoCard extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleEdit = this.handleEdit.bind(this);
+  }
+  handleEdit() {
+    this.props.onEditClick("genInfo");
+    alert("Event");
+  }
+
   render() {
     return (
       <Card className="rounded">
@@ -30,7 +39,7 @@ export default class GenInfoCard extends React.Component {
           <School school={this.props.school} />
           <Location location={this.props.location} />
         </div>
-        <Edit />
+        <Edit onClick={this.handleEdit} />
       </Card>
     );
   }
