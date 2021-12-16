@@ -1,8 +1,54 @@
+html, body {
+    min-height: 100vh;
+    width: 100vw;
+    padding: 0;
+    margin: 0;
+}
+
+h1 {
+    font-size: 24px;
+}
+
 .App {
     display: flex;
     flex-direction: column;
+    width: 100%;
+    height: 100%;
+    background-color: gainsboro;
+    gap: 12px;
 }
-form {
+
+.card {
+background-color: white;
+padding: 12px;
+display: flex;
+align-items: flex-start;
+justify-content: space-between;
+box-shadow: rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+}
+
+.card-content {
     display: flex;
     flex-direction: column;
+    gap: 4px;
+}
+
+.card button {
+    height: 2rem;
+    width: 2rem;
+    border: none;
+    background-color: inherit;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+}
+
+.card button:hover {
+    background-color: lightblue;
+}
+
+.rounded {
+    border-radius: 5px;
 }
