@@ -27,7 +27,6 @@ export default class GenInfoCard extends React.Component {
   }
   handleEdit() {
     this.props.onEditClick("genInfo");
-    alert("Event");
   }
 
   render() {

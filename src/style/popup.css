@@ -1,0 +1,41 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+.popup {
+    position: absolute;
+    background-color: lightcyan;
+    width: 100vw;
+    height: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
+}
+
+.popup-top {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+.popup form {
+    display: flex;
+    flex-direction: column;
+    width:100%;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    flex-grow: 1;
+}
+
+label {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    width: 100%;
+}
+
+input[type='submit'] {
+    align-self: flex-end;
+}
