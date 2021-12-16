@@ -2,7 +2,7 @@ import "./style/reset.css";
 import "./style/app.css";
 import React from "react";
 // import EducationalExperience from "./components/forms/EducationalExperience";
-// import GeneralInfo from "./components/forms/GeneralInfo";
+import GeneralInfo from "./components/forms/GeneralInfo";
 // import WorkExperience from "./components/forms/WorkExperience";
 import GenInfoCard from "./components/GeneralInfoCard.js";
 
@@ -38,6 +38,7 @@ export default class App extends React.Component {
           {...defaultGenValues}
         ></GenInfoCard>
         <GenInfoCard {...defaultGenValues}></GenInfoCard>
+        <div>{this.state.showHideGenInfo && <GeneralInfo />}</div>
       </div>
     );
   }
