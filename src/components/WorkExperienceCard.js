@@ -24,11 +24,14 @@ const Location = (props) => {
 
 const CardContent = (props) => {
   return (
-    <div className="card-content job">
-      <Name name={props.title} />
-      <Location location={props.location} />
-      <Years years={props.years} />
-      <Description description={props.description} />
+      <div className="card-content job">
+        <div>
+        <Name name={props.title} />
+        <Location location={props.location} />
+        <Years years={props.years} />
+        <Description description={props.description} />
+      </div>
+      <Edit />
     </div>
   );
 };
@@ -49,7 +52,6 @@ export default class GenInfoCard extends React.Component {
           <h1>Experience</h1>
           <div className="button-list">
             <Plus onClick={this.handleEdit} />
-            <Edit />
           </div>
         </div>
         <div className="experienceList">

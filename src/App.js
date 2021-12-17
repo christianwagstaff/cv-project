@@ -46,6 +46,10 @@ export default class App extends React.Component {
           description: "Pulled Credit Reports and created Spreadsheets",
         },
       ],
+      newJobTitle: "",
+      newJobLocation: "",
+      newJobYears: "",
+      newJobDescription: "",
     };
   }
 
@@ -81,6 +85,34 @@ export default class App extends React.Component {
     this.hideComponent("about");
   };
 
+  handleSubmitNewJob = (e) => {
+    e.preventDefault();
+    const title = this.state.newJobTitle;
+    const years = this.state.newJobYears;
+    const description = this.state.newJobDescription;
+    const location = this.state.newJobLocation;
+    const newJob = {
+      id: uniqid(),
+      title: title,
+      location: location,
+      years: years,
+      description: description,
+    };
+    this.setState({
+      workExperience: [...this.state.workExperience, newJob],
+    });
+    this.hideComponent("experience");
+    this.clearNewJob();
+  };
+  clearNewJob() {
+    this.setState({
+      newJobTitle: "",
+      newJobLocation: "",
+      newJobYears: "",
+      newJobDescription: "",
+    });
+  }
+
   hideComponent(name) {
     console.log(name);
     switch (name) {
@@ -111,6 +143,12 @@ export default class App extends React.Component {
       school: this.state.genInfoSchoolEdit,
       location: this.state.genInfoLocationEdit,
     };
+    const newJobState = {
+      title: this.state.newJobTitle,
+      years: this.state.newJobYears,
+      description: this.state.newJobDescription,
+      location: this.state.newJobLocation,
+    };
     return (
       <div className="App">
         <GenInfoCard onEditClick={this.hideComponent} {...defaultGenValues} />
@@ -137,10 +175,10 @@ export default class App extends React.Component {
         />
         {this.state.showHideExperience && (
           <WorkExperienceForm
-            about={this.state.aboutEdit}
+            {...newJobState}
             onCloseClick={this.hideComponent}
             onChange={this.handleChange}
-            onSubmit={this.handleSubmitAbout}
+            onSubmit={this.handleSubmitNewJob}
           />
         )}
       </div>

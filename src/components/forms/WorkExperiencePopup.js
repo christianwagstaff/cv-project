@@ -30,36 +30,36 @@ export default class WorkExperienceForm extends React.Component {
           <label>
             Job Title:
             <input
-              name="title"
+              name="newJobTitle"
               type="text"
-              value={this.props.name}
+              value={this.props.title}
               onChange={this.handleChange}
             />
           </label>
           <label>
             Business:
             <input
-              name="location"
-              type="text"
-              value={this.props.headline}
-              onChange={this.handleChange}
-            />
-          </label>
-          <label>
-            School:
-            <input
-              name="genInfoSchoolEdit"
-              type="text"
-              value={this.props.school}
-              onChange={this.handleChange}
-            />
-          </label>
-          <label>
-            Location:
-            <input
-              name="genInfoLocationEdit"
+              name="newJobLocation"
               type="text"
               value={this.props.location}
+              onChange={this.handleChange}
+            />
+          </label>
+          <label>
+            Years Worked:
+            <input
+              name="newJobYears"
+              type="text"
+              value={this.props.years}
+              onChange={this.handleChange}
+            />
+          </label>
+          <label>
+            Describe Basic Job Duties:
+            <input
+              name="newJobDescription"
+              type="text"
+              value={this.props.description}
               onChange={this.handleChange}
             />
           </label>

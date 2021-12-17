@@ -28,8 +28,13 @@ h1 {
     box-shadow: rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
 }
 
-.card.vert {
+.vert {
+    display: flex;
     flex-direction: column;
+}
+
+.horizontal {
+    display: flex;
 }
 
 .card-top {
@@ -42,7 +47,7 @@ h1 {
     display: flex;
 }
 
-.card-content {
+.card-content > div{
     display: flex;
     flex-direction: column;
     gap: 4px;
@@ -87,10 +92,14 @@ h1 {
 
 .job {
     width: 100%;
+    display: flex;
+    justify-content: space-between;
 }
 
-.job:not(:nth-of-type(1))::before {
-    content: '';
-    width: 100%;
-    border: 1px solid rgb(233, 233, 233);
+button.edit {
+    display: none;
+}
+
+.job:hover button.edit {
+    display: block;
 }
