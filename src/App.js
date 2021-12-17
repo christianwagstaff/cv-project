@@ -90,13 +90,18 @@ export default class App extends React.Component {
     this.hideComponent("about");
   };
 
-  handleDeleteJob = (e) => {
-    e.preventDefault();
-    const id = this.state.editJobId;
+  handleDeleteJob = (id) => {
     const oldArray = this.state.workExperience;
     const selectedIndex = oldArray.findIndex((job) => job.id === id);
+    // this.setState({
+    //   workExperience: replaceAt(oldArray, selectedIndex, ""),
+    // });
+    const newArray = [
+      ...oldArray.slice(0, selectedIndex),
+      ...oldArray.slice(selectedIndex + 1),
+    ];
     this.setState({
-      workExperience: replaceAt(oldArray, selectedIndex, ""),
+      workExperience: newArray,
     });
   };
 

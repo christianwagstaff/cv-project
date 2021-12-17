@@ -33,7 +33,7 @@ const CardContent = (props) => {
         <Description description={props.description} />
       </div>
       <div className="button-list">
-        <Delete />
+        <Delete onClick={props.deleteExperience} />
         <Edit onClick={props.editExperience} />
       </div>
     </div>
@@ -45,6 +45,7 @@ export default class GenInfoCard extends React.Component {
     super(props);
     this.addNewExperience = this.addNewExperience.bind(this);
     this.editExperience = this.editExperience.bind(this);
+    this.deleteExperience = this.deleteExperience.bind(this);
   }
   addNewExperience() {
     this.props.onEditClick("experience");
@@ -53,6 +54,10 @@ export default class GenInfoCard extends React.Component {
   editExperience(id) {
     this.props.onEditClick("editExperience");
     this.props.editExperience(id);
+  }
+
+  deleteExperience(id) {
+    this.props.deleteExperience(id);
   }
 
   render() {
@@ -79,6 +84,7 @@ export default class GenInfoCard extends React.Component {
                 years={years}
                 description={description}
                 editExperience={() => this.editExperience(key)}
+                deleteExperience={() => this.deleteExperience(key)}
               />
             );
           })}
