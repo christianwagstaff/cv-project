@@ -2,7 +2,7 @@ import React from "react";
 import Edit from "./icons/Edit";
 
 const Card = (props) => {
-  return <div className="card">{props.children}</div>;
+  return <div className="card rounded">{props.children}</div>;
 };
 
 const Name = (props) => {
@@ -31,7 +31,7 @@ export default class GenInfoCard extends React.Component {
 
   render() {
     return (
-      <Card className="rounded">
+      <Card>
         <div className="card-content">
           <Name name={this.props.name} />
           <Headline headline={this.props.headline} />

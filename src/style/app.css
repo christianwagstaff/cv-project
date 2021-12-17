@@ -27,6 +27,17 @@ justify-content: space-between;
 box-shadow: rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
 }
 
+.card.vert {
+    flex-direction: column;
+}
+
+.card-top {
+    display: flex;
+    width: 100%;
+justify-content: space-between;
+
+}
+
 .card-content {
     display: flex;
     flex-direction: column;

@@ -6,9 +6,17 @@ export default class GeneralInfoPopup extends React.Component {
   constructor() {
     super();
     this.handleClose = this.handleClose.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
   handleClose() {
     this.props.onCloseClick("genInfo");
+  }
+  handleChange(e) {
+    this.props.onChange(e);
+  }
+  handleSubmit(e) {
+    this.props.onSubmit(e);
   }
 
   render() {
@@ -18,11 +26,11 @@ export default class GeneralInfoPopup extends React.Component {
           <h1>Edit Intro</h1>
           <Close onClick={this.handleClose} />
         </div>
-        <form className="general-info-form">
+        <form className="general-info-form" onSubmit={this.handleSubmit}>
           <label>
             Name:
             <input
-              name="inputName"
+              name="genInfoNameEdit"
               type="text"
               value={this.props.name}
               onChange={this.handleChange}
@@ -31,7 +39,7 @@ export default class GeneralInfoPopup extends React.Component {
           <label>
             Headline:
             <input
-              name="inputHeadline"
+              name="genInfoHeadlineEdit"
               type="text"
               value={this.props.headline}
               onChange={this.handleChange}
@@ -40,7 +48,7 @@ export default class GeneralInfoPopup extends React.Component {
           <label>
             School:
             <input
-              name="inputSchool"
+              name="genInfoSchoolEdit"
               type="text"
               value={this.props.school}
               onChange={this.handleChange}
@@ -49,7 +57,7 @@ export default class GeneralInfoPopup extends React.Component {
           <label>
             Location:
             <input
-              name="inputLocation"
+              name="genInfoLocationEdit"
               type="text"
               value={this.props.location}
               onChange={this.handleChange}
