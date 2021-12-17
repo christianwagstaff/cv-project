@@ -1,12 +1,14 @@
 import "./style/reset.css";
 import "./style/app.css";
 import React from "react";
+import uniqid from "uniqid";
 // import EducationalExperience from "./components/forms/EducationalExperience";
 import GeneralInfoPopup from "./components/forms/GeneralInfoPopup";
-// import WorkExperience from "./components/forms/WorkExperience";
 import GenInfoCard from "./components/GeneralInfoCard.js";
 import About from "./components/About";
 import AboutForm from "./components/forms/AboutForm";
+import WorkExperienceCard from "./components/WorkExperienceCard";
+import WorkExperienceForm from "./components/forms/WorkExperiencePopup";
 
 export default class App extends React.Component {
   constructor() {
@@ -15,6 +17,7 @@ export default class App extends React.Component {
     this.state = {
       showHideGenInfo: false,
       showHideAbout: false,
+      showHideExperience: false,
       genInfoName: "Christian Wagstaff",
       genInfoNameEdit: "Christian Wagstaff",
       genInfoHeadline: "A Headline Here",
@@ -27,6 +30,22 @@ export default class App extends React.Component {
         "Skilled Problem Solver, with a demonstrated history of developing data pipelines to efficiently track sales data in a multi billion dollar bank. Strong multitasker and communicator, Created a data warehouse to track all loan processes, from application to boarding. Skilled Mathematician, with a long background in training and teaching. ",
       aboutEdit:
         "Skilled Problem Solver, with a demonstrated history of developing data pipelines to efficiently track sales data in a multi billion dollar bank. Strong multitasker and communicator, Created a data warehouse to track all loan processes, from application to boarding. Skilled Mathematician, with a long background in training and teaching. ",
+      workExperience: [
+        {
+          id: uniqid(),
+          title: "Bartender",
+          location: "Black Angus Steakhouses",
+          years: "Aug 2017 - Oct 2021",
+          description: "Make Drinks nightly for many customers",
+        },
+        {
+          id: uniqid(),
+          title: "Credit Assistant",
+          location: "Bank of the Sierra",
+          years: "Aug 2017 - Oct 2021",
+          description: "Pulled Credit Reports and created Spreadsheets",
+        },
+      ],
     };
   }
 
@@ -71,8 +90,11 @@ export default class App extends React.Component {
       case "about":
         this.setState({ showHideAbout: !this.state.showHideAbout });
         break;
+      case "experience":
+        this.setState({ showHideExperience: !this.state.showHideExperience });
+        break;
       default:
-        alert("HideShow went wrong.");
+        Error("HideShow went wrong.");
     }
   }
 
@@ -103,6 +125,18 @@ export default class App extends React.Component {
         <About onEditClick={this.hideComponent} about={this.state.about} />
         {this.state.showHideAbout && (
           <AboutForm
+            about={this.state.aboutEdit}
+            onCloseClick={this.hideComponent}
+            onChange={this.handleChange}
+            onSubmit={this.handleSubmitAbout}
+          />
+        )}
+        <WorkExperienceCard
+          onEditClick={this.hideComponent}
+          jobList={this.state.workExperience}
+        />
+        {this.state.showHideExperience && (
+          <WorkExperienceForm
             about={this.state.aboutEdit}
             onCloseClick={this.hideComponent}
             onChange={this.handleChange}

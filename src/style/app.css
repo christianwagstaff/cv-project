@@ -19,12 +19,13 @@ h1 {
 }
 
 .card {
-background-color: white;
-padding: 12px;
-display: flex;
-align-items: flex-start;
-justify-content: space-between;
-box-shadow: rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+    background-color: white;
+    gap: 12px;
+    padding: 12px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    box-shadow: rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
 }
 
 .card.vert {
@@ -34,8 +35,11 @@ box-shadow: rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
 .card-top {
     display: flex;
     width: 100%;
-justify-content: space-between;
+    justify-content: space-between;
+}
 
+.button-list {
+    display: flex;
 }
 
 .card-content {
@@ -62,4 +66,31 @@ justify-content: space-between;
 
 .rounded {
     border-radius: 5px;
+}
+
+.experienceList {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding-left: 12px;
+    width: 100%;
+
+}
+
+.font-small {
+    font-size: .7rem;
+}
+
+.bold {
+    font-weight: 600;
+}
+
+.job {
+    width: 100%;
+}
+
+.job:not(:nth-of-type(1))::before {
+    content: '';
+    width: 100%;
+    border: 1px solid rgb(233, 233, 233);
 }
