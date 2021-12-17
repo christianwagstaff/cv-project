@@ -54,7 +54,7 @@ export default class GenInfoCard extends React.Component {
             <Plus onClick={this.handleEdit} />
           </div>
         </div>
-        <div className="experienceList">
+        <div className="experienceList left-indent">
           {[...this.props.jobList].map((job) => {
             let key = job.id;
             let title = job.title;

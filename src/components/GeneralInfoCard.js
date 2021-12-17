@@ -10,15 +10,15 @@ const Name = (props) => {
 };
 
 const Headline = (props) => {
-  return <div className="headline">{props.headline}</div>;
+  return <div className="headline left-indent">{props.headline}</div>;
 };
 
 const School = (props) => {
-  return <div className="school">{props.school}</div>;
+  return <div className="school left-indent">{props.school}</div>;
 };
 
 const Location = (props) => {
-  return <div className="location">{props.location}</div>;
+  return <div className="location left-indent">{props.location}</div>;
 };
 export default class GenInfoCard extends React.Component {
   constructor(props) {

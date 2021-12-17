@@ -21,7 +21,7 @@ export default class About extends React.Component {
           <h1>About</h1>
           <Edit onClick={this.handleEdit} />
         </div>
-        <p>{this.props.about}</p>
+        <p className="left-indent">{this.props.about}</p>
       </Card>
     );
   }
