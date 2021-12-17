@@ -97,12 +97,13 @@ h1 {
     border-bottom: 1px solid rgb(223, 223, 223);
 }
 
-button.edit {
+.job .button-list {
     display: none;
 }
 
-.job:hover button.edit {
-    display: block;
+.job:hover .button-list {
+    display: flex;
+    flex-direction: row;
 }
 
 .job:last-of-type {

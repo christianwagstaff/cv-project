@@ -1,6 +1,7 @@
 import React from "react";
 import Edit from "./icons/Edit";
 import Plus from "./icons/Plus";
+import Delete from "./icons/Delete";
 
 const Card = (props) => {
   return <div className="card vert rounded">{props.children}</div>;
@@ -31,7 +32,10 @@ const CardContent = (props) => {
         <Years years={props.years} />
         <Description description={props.description} />
       </div>
-      <Edit onClick={props.editExperience} />
+      <div className="button-list">
+        <Delete />
+        <Edit onClick={props.editExperience} />
+      </div>
     </div>
   );
 };
