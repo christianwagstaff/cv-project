@@ -30,7 +30,7 @@ export default class WorkExperienceEditForm extends React.Component {
           <label>
             Job Title:
             <input
-              name="newJobTitle"
+              name="editJobTitle"
               type="text"
               value={this.props.title}
               onChange={this.handleChange}
@@ -39,7 +39,7 @@ export default class WorkExperienceEditForm extends React.Component {
           <label>
             Business:
             <input
-              name="newJobLocation"
+              name="editJobLocation"
               type="text"
               value={this.props.location}
               onChange={this.handleChange}
@@ -48,7 +48,7 @@ export default class WorkExperienceEditForm extends React.Component {
           <label>
             Years Worked:
             <input
-              name="newJobYears"
+              name="editJobYears"
               type="text"
               value={this.props.years}
               onChange={this.handleChange}
@@ -57,7 +57,7 @@ export default class WorkExperienceEditForm extends React.Component {
           <label>
             Describe Basic Job Duties:
             <input
-              name="newJobDescription"
+              name="editJobDescription"
               type="text"
               value={this.props.description}
               onChange={this.handleChange}

@@ -55,6 +55,7 @@ export default class App extends React.Component {
       editJobLocation: "",
       editJobYears: "",
       editJobDescription: "",
+      editJobId: "",
     };
   }
 
@@ -89,9 +90,36 @@ export default class App extends React.Component {
     this.hideComponent("about");
   };
 
+  handleDeleteJob = (e) => {
+    e.preventDefault();
+    const id = this.state.editJobId;
+    const oldArray = this.state.workExperience;
+    const selectedIndex = oldArray.findIndex((job) => job.id === id);
+    this.setState({
+      workExperience: replaceAt(oldArray, selectedIndex, ""),
+    });
+  };
+
   handleSubmitEditJob = (e) => {
     e.preventDefault();
-    alert("edit job");
+    const oldArray = this.state.workExperience;
+    const title = this.state.editJobTitle;
+    const years = this.state.editJobYears;
+    const description = this.state.editJobDescription;
+    const location = this.state.editJobLocation;
+    const id = this.state.editJobId;
+    const updatedJob = {
+      id: id,
+      title: title,
+      location: location,
+      years: years,
+      description: description,
+    };
+    const selectedIndex = oldArray.findIndex((job) => job.id === id);
+    this.setState({
+      workExperience: replaceAt(oldArray, selectedIndex, updatedJob),
+    });
+    this.hideComponent("editExperience");
   };
 
   handleSubmitNewJob = (e) => {
@@ -113,6 +141,7 @@ export default class App extends React.Component {
     this.hideComponent("experience");
     this.clearNewJob();
   };
+
   clearNewJob() {
     this.setState({
       newJobTitle: "",
@@ -123,7 +152,6 @@ export default class App extends React.Component {
   }
 
   hideComponent(name) {
-    console.log(name);
     switch (name) {
       case "genInfo":
         this.setState({ showHideGenInfo: !this.state.showHideGenInfo });
@@ -147,8 +175,18 @@ export default class App extends React.Component {
   editWorkExperience = (id) => {
     const selectedJob = this.state.workExperience.filter(
       (job) => job.id === id
-    );
-    console.log(selectedJob);
+    )[0];
+    const title = selectedJob.title;
+    const years = selectedJob.years;
+    const description = selectedJob.description;
+    const location = selectedJob.location;
+    this.setState({
+      editJobId: selectedJob.id,
+      editJobTitle: title,
+      editJobLocation: location,
+      editJobYears: years,
+      editJobDescription: description,
+    });
   };
 
   render() {
@@ -200,6 +238,7 @@ export default class App extends React.Component {
           onEditClick={this.hideComponent}
           jobList={this.state.workExperience}
           editExperience={this.editWorkExperience}
+          deleteExperience={this.handleDeleteJob}
         />
         {this.state.showHideExperience && (
           <WorkExperienceForm
@@ -220,4 +259,10 @@ export default class App extends React.Component {
       </div>
     );
   }
+}
+
+function replaceAt(array, index, value) {
+  const ret = array.slice(0);
+  ret[index] = value;
+  return ret;
 }
