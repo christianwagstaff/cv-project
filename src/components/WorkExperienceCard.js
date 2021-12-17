@@ -24,14 +24,14 @@ const Location = (props) => {
 
 const CardContent = (props) => {
   return (
-      <div className="card-content job">
-        <div>
+    <div className="card-content job">
+      <div>
         <Name name={props.title} />
         <Location location={props.location} />
         <Years years={props.years} />
         <Description description={props.description} />
       </div>
-      <Edit />
+      <Edit onClick={props.editExperience} />
     </div>
   );
 };
@@ -39,10 +39,15 @@ const CardContent = (props) => {
 export default class GenInfoCard extends React.Component {
   constructor(props) {
     super(props);
-    this.handleEdit = this.handleEdit.bind(this);
+    this.addNewExperience = this.addNewExperience.bind(this);
+    this.editExperience = this.editExperience.bind(this);
   }
-  handleEdit() {
+  addNewExperience() {
     this.props.onEditClick("experience");
+  }
+
+  editExperience(id) {
+    this.props.editExperience(id);
   }
 
   render() {
@@ -51,7 +56,7 @@ export default class GenInfoCard extends React.Component {
         <div className="card-top">
           <h1>Experience</h1>
           <div className="button-list">
-            <Plus onClick={this.handleEdit} />
+            <Plus onClick={this.addNewExperience} />
           </div>
         </div>
         <div className="experienceList left-indent">
@@ -68,6 +73,7 @@ export default class GenInfoCard extends React.Component {
                 location={location}
                 years={years}
                 description={description}
+                editExperience={() => this.editExperience(key)}
               />
             );
           })}

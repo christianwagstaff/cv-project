@@ -57,7 +57,6 @@ export default class App extends React.Component {
     const target = e.target;
     const value = target.value;
     const name = target.name;
-    console.log(value + name);
     this.setState({ [name]: value });
   };
 
@@ -130,6 +129,10 @@ export default class App extends React.Component {
     }
   }
 
+  editWorkExperience = (id) => {
+    console.log(id);
+  };
+
   render() {
     const defaultGenValues = {
       name: this.state.genInfoName,
@@ -172,6 +175,7 @@ export default class App extends React.Component {
         <WorkExperienceCard
           onEditClick={this.hideComponent}
           jobList={this.state.workExperience}
+          editExperience={this.editWorkExperience}
         />
         {this.state.showHideExperience && (
           <WorkExperienceForm
