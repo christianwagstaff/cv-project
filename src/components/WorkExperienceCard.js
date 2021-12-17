@@ -47,6 +47,7 @@ export default class GenInfoCard extends React.Component {
   }
 
   editExperience(id) {
+    this.props.onEditClick("editExperience");
     this.props.editExperience(id);
   }
 

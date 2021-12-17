@@ -2,13 +2,13 @@ import "./style/reset.css";
 import "./style/app.css";
 import React from "react";
 import uniqid from "uniqid";
-// import EducationalExperience from "./components/forms/EducationalExperience";
 import GeneralInfoPopup from "./components/forms/GeneralInfoPopup";
 import GenInfoCard from "./components/GeneralInfoCard.js";
 import About from "./components/About";
 import AboutForm from "./components/forms/AboutForm";
 import WorkExperienceCard from "./components/WorkExperienceCard";
 import WorkExperienceForm from "./components/forms/WorkExperiencePopup";
+import WorkExperienceEditForm from "./components/forms/WorkExperienceEditPopup";
 
 export default class App extends React.Component {
   constructor() {
@@ -18,6 +18,7 @@ export default class App extends React.Component {
       showHideGenInfo: false,
       showHideAbout: false,
       showHideExperience: false,
+      showHideEditExperience: false,
       genInfoName: "Christian Wagstaff",
       genInfoNameEdit: "Christian Wagstaff",
       genInfoHeadline: "A Headline Here",
@@ -50,6 +51,10 @@ export default class App extends React.Component {
       newJobLocation: "",
       newJobYears: "",
       newJobDescription: "",
+      editJobTitle: "",
+      editJobLocation: "",
+      editJobYears: "",
+      editJobDescription: "",
     };
   }
 
@@ -82,6 +87,11 @@ export default class App extends React.Component {
       about: about,
     });
     this.hideComponent("about");
+  };
+
+  handleSubmitEditJob = (e) => {
+    e.preventDefault();
+    alert("edit job");
   };
 
   handleSubmitNewJob = (e) => {
@@ -124,13 +134,21 @@ export default class App extends React.Component {
       case "experience":
         this.setState({ showHideExperience: !this.state.showHideExperience });
         break;
+      case "editExperience":
+        this.setState({
+          showHideEditExperience: !this.state.showHideEditExperience,
+        });
+        break;
       default:
         Error("HideShow went wrong.");
     }
   }
 
   editWorkExperience = (id) => {
-    console.log(id);
+    const selectedJob = this.state.workExperience.filter(
+      (job) => job.id === id
+    );
+    console.log(selectedJob);
   };
 
   render() {
@@ -151,6 +169,12 @@ export default class App extends React.Component {
       years: this.state.newJobYears,
       description: this.state.newJobDescription,
       location: this.state.newJobLocation,
+    };
+    const editJobState = {
+      title: this.state.editJobTitle,
+      years: this.state.editJobYears,
+      description: this.state.editJobDescription,
+      location: this.state.editJobLocation,
     };
     return (
       <div className="App">
@@ -183,6 +207,14 @@ export default class App extends React.Component {
             onCloseClick={this.hideComponent}
             onChange={this.handleChange}
             onSubmit={this.handleSubmitNewJob}
+          />
+        )}
+        {this.state.showHideEditExperience && (
+          <WorkExperienceEditForm
+            {...editJobState}
+            onCloseClick={this.hideComponent}
+            onChange={this.handleChange}
+            onSubmit={this.handleSubmitEditJob}
           />
         )}
       </div>
