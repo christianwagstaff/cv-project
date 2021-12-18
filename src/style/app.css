@@ -16,6 +16,7 @@ h1 {
     height: 100%;
     background-color: gainsboro;
     gap: 12px;
+    padding-bottom: 12px;
 }
 
 .card {
@@ -45,6 +46,7 @@ h1 {
 
 .button-list {
     display: flex;
+    height: fit-content;
 }
 
 .card-content > div{
@@ -76,6 +78,7 @@ h1 {
 .experienceList {
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
     gap: 12px;
     width: 100%;
 
@@ -112,4 +115,9 @@ h1 {
 
 .left-indent {
     padding-left: 12px;
+}
+
+.skill {
+    height: 2rem;
+    align-items: center;
 }

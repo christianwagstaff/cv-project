@@ -9,6 +9,7 @@ import AboutForm from "./components/forms/AboutForm";
 import WorkExperienceCard from "./components/WorkExperienceCard";
 import WorkExperienceForm from "./components/forms/WorkExperiencePopup";
 import WorkExperienceEditForm from "./components/forms/WorkExperienceEditPopup";
+import Skills from "./components/Skills";
 
 export default class App extends React.Component {
   constructor() {
@@ -56,6 +57,11 @@ export default class App extends React.Component {
       editJobYears: "",
       editJobDescription: "",
       editJobId: "",
+      skillList: [
+        { skill: "Skill1", id: uniqid() },
+        { skill: "Skill2", id: uniqid() },
+        { skill: "Skill3", id: uniqid() },
+      ],
     };
   }
 
@@ -261,6 +267,7 @@ export default class App extends React.Component {
             onSubmit={this.handleSubmitEditJob}
           />
         )}
+        <Skills skillList={this.state.skillList} />
       </div>
     );
   }
