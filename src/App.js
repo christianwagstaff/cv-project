@@ -8,7 +8,6 @@ import WorkExperienceCard from "./components/WorkExperienceCard";
 import WorkExperienceForm from "./components/forms/WorkExperiencePopup";
 import WorkExperienceEditForm from "./components/forms/WorkExperienceEditPopup";
 import Skills from "./components/Skills";
-import SkillForm from "./components/forms/SkillPopup";
 
 export default class App extends React.Component {
   constructor() {
@@ -17,8 +16,6 @@ export default class App extends React.Component {
     this.state = {
       showHideExperience: false,
       showHideEditExperience: false,
-      showHideAddSkill: false,
-      showHideEditSkill: false,
       workExperience: [
         {
           id: uniqid(),
@@ -44,13 +41,6 @@ export default class App extends React.Component {
       editJobYears: "",
       editJobDescription: "",
       editJobId: "",
-      skillList: [
-        { skill: "Skill1", id: uniqid() },
-        { skill: "Skill2", id: uniqid() },
-        { skill: "Skill3", id: uniqid() },
-      ],
-      newSkill: "",
-      editSkillId: "",
     };
   }
 
@@ -95,28 +85,6 @@ export default class App extends React.Component {
     this.hideComponent("editExperience");
   };
 
-  handleSubmitNewSkill = (e) => {
-    e.preventDefault();
-    const newSkill = { skill: this.state.newSkill, id: uniqid() };
-    this.setState({
-      skillList: [...this.state.skillList, newSkill],
-    });
-    this.clearNewJob();
-    this.hideComponent("skill");
-  };
-
-  handleSubmitEditSkill = (e) => {
-    e.preventDefault();
-    const oldArray = this.state.skillList;
-    const id = this.state.editSkillId;
-    const updated = { skill: this.state.newSkill, id: id };
-    const selectedIndex = oldArray.findIndex((job) => job.id === id);
-    this.setState({
-      skillList: replaceAt(oldArray, selectedIndex, updated),
-    });
-    this.hideComponent("editSkill");
-  };
-
   handleSubmitNewJob = (e) => {
     e.preventDefault();
     const title = this.state.newJobTitle;
@@ -137,12 +105,6 @@ export default class App extends React.Component {
     this.clearNewJob();
   };
 
-  clearNewSkill() {
-    this.setState({
-      newSkill: "",
-    });
-  }
-
   clearNewJob() {
     this.setState({
       newJobTitle: "",
@@ -162,38 +124,10 @@ export default class App extends React.Component {
           showHideEditExperience: !this.state.showHideEditExperience,
         });
         break;
-      case "skill":
-        this.setState({ showHideAddSkill: !this.state.showHideAddSkill });
-        break;
-      case "editSkill":
-        this.setState({ showHideEditSkill: !this.state.showHideEditSkill });
-        break;
       default:
         Error("HideShow went wrong.");
     }
   }
-
-  editSkill = (id) => {
-    const selected = this.state.skillList.filter((skill) => skill.id === id)[0];
-    console.log(selected);
-    const skill = selected.skill;
-    this.setState({
-      newSkill: skill,
-      editSkillId: id,
-    });
-  };
-
-  deleteSkill = (id) => {
-    const oldArray = this.state.skillList;
-    const selectedIndex = oldArray.findIndex((skill) => skill.id === id);
-    const newArray = [
-      ...oldArray.slice(0, selectedIndex),
-      ...oldArray.slice(selectedIndex + 1),
-    ];
-    this.setState({
-      skillList: newArray,
-    });
-  };
 
   editWorkExperience = (id) => {
     const selectedJob = this.state.workExperience.filter(
@@ -227,7 +161,7 @@ export default class App extends React.Component {
     };
     return (
       <div className="App">
-        <GenInfoCard  />
+        <GenInfoCard />
         <About />
         <WorkExperienceCard
           onEditClick={this.hideComponent}
@@ -251,29 +185,7 @@ export default class App extends React.Component {
             onSubmit={this.handleSubmitEditJob}
           />
         )}
-        <Skills
-          skillList={this.state.skillList}
-          editSkill={this.editSkill}
-          deleteSkill={this.deleteSkill}
-          addSkill={this.hideComponent}
-        />
-        {this.state.showHideAddSkill && (
-          <SkillForm
-            onCloseClick={this.hideComponent}
-            popupName="skill"
-            onChange={this.handleChange}
-            onSubmit={this.handleSubmitNewSkill}
-          />
-        )}
-        {this.state.showHideEditSkill && (
-          <SkillForm
-            skill={this.state.newSkill}
-            onCloseClick={this.hideComponent}
-            popupName="editSkill"
-            onChange={this.handleChange}
-            onSubmit={this.handleSubmitEditSkill}
-          />
-        )}
+        <Skills />
       </div>
     );
   }
