@@ -2,7 +2,6 @@ import "./style/reset.css";
 import "./style/app.css";
 import React from "react";
 import uniqid from "uniqid";
-import GeneralInfoPopup from "./components/forms/GeneralInfoPopup";
 import GenInfoCard from "./components/GeneralInfoCard.js";
 import About from "./components/About";
 import WorkExperienceCard from "./components/WorkExperienceCard";
@@ -16,19 +15,10 @@ export default class App extends React.Component {
     super();
     this.hideComponent = this.hideComponent.bind(this);
     this.state = {
-      showHideGenInfo: false,
       showHideExperience: false,
       showHideEditExperience: false,
       showHideAddSkill: false,
       showHideEditSkill: false,
-      genInfoName: "Christian Wagstaff",
-      genInfoNameEdit: "Christian Wagstaff",
-      genInfoHeadline: "A Headline Here",
-      genInfoHeadlineEdit: "A Headline Here",
-      genInfoSchool: "CSUCI",
-      genInfoSchoolEdit: "CSUCI",
-      genInfoLocation: "Ventura, CA",
-      genInfoLocationEdit: "Ventura, CA",
       workExperience: [
         {
           id: uniqid(),
@@ -69,30 +59,6 @@ export default class App extends React.Component {
     const value = target.value;
     const name = target.name;
     this.setState({ [name]: value });
-  };
-
-  handleSubmitGenInfo = (e) => {
-    e.preventDefault();
-    const name = this.state.genInfoNameEdit;
-    const headline = this.state.genInfoHeadlineEdit;
-    const school = this.state.genInfoSchoolEdit;
-    const location = this.state.genInfoLocationEdit;
-    this.setState({
-      genInfoName: name,
-      genInfoHeadline: headline,
-      genInfoLocation: location,
-      genInfoSchool: school,
-    });
-    this.hideComponent("genInfo");
-  };
-
-  handleSubmitAbout = (e) => {
-    e.preventDefault();
-    const about = this.state.aboutEdit;
-    this.setState({
-      about: about,
-    });
-    this.hideComponent("about");
   };
 
   handleDeleteJob = (id) => {
@@ -188,12 +154,6 @@ export default class App extends React.Component {
 
   hideComponent(name) {
     switch (name) {
-      case "genInfo":
-        this.setState({ showHideGenInfo: !this.state.showHideGenInfo });
-        break;
-      case "about":
-        this.setState({ showHideAbout: !this.state.showHideAbout });
-        break;
       case "experience":
         this.setState({ showHideExperience: !this.state.showHideExperience });
         break;
@@ -253,18 +213,6 @@ export default class App extends React.Component {
   };
 
   render() {
-    const defaultGenValues = {
-      name: this.state.genInfoName,
-      headline: this.state.genInfoHeadline,
-      school: this.state.genInfoSchool,
-      location: this.state.genInfoLocation,
-    };
-    const defaultGenEdit = {
-      name: this.state.genInfoNameEdit,
-      headline: this.state.genInfoHeadlineEdit,
-      school: this.state.genInfoSchoolEdit,
-      location: this.state.genInfoLocationEdit,
-    };
     const newJobState = {
       title: this.state.newJobTitle,
       years: this.state.newJobYears,
@@ -279,15 +227,7 @@ export default class App extends React.Component {
     };
     return (
       <div className="App">
-        <GenInfoCard onEditClick={this.hideComponent} {...defaultGenValues} />
-        {this.state.showHideGenInfo && (
-          <GeneralInfoPopup
-            {...defaultGenEdit}
-            onCloseClick={this.hideComponent}
-            onChange={this.handleChange}
-            onSubmit={this.handleSubmitGenInfo}
-          />
-        )}
+        <GenInfoCard  />
         <About />
         <WorkExperienceCard
           onEditClick={this.hideComponent}

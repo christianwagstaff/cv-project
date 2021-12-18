@@ -2,72 +2,64 @@ import React from "react";
 import "../../style/popup.css";
 import Close from "../icons/Close";
 
-export default class GeneralInfoPopup extends React.Component {
-  constructor() {
-    super();
-    this.handleClose = this.handleClose.bind(this);
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+export default function GeneralInfoPopup(props) {
+  function handleClose() {
+    props.onCloseClick();
   }
-  handleClose() {
-    this.props.onCloseClick("genInfo");
+  function handleChange(e) {
+    props.onChange(e.target);
   }
-  handleChange(e) {
-    this.props.onChange(e);
-  }
-  handleSubmit(e) {
-    this.props.onSubmit(e);
+  function handleSubmit(e) {
+    props.onSubmit(e);
   }
 
-  render() {
-    return (
-      <div className="popup-wrapper">
-        <div className="popup">
-          <div className="popup-top">
-            <h1>Edit Intro</h1>
-            <Close onClick={this.handleClose} />
-          </div>
-          <form className="general-info-form" onSubmit={this.handleSubmit}>
-            <label>
-              Name:
-              <input
-                name="genInfoNameEdit"
-                type="text"
-                value={this.props.name}
-                onChange={this.handleChange}
-              />
-            </label>
-            <label>
-              Headline:
-              <input
-                name="genInfoHeadlineEdit"
-                type="text"
-                value={this.props.headline}
-                onChange={this.handleChange}
-              />
-            </label>
-            <label>
-              School:
-              <input
-                name="genInfoSchoolEdit"
-                type="text"
-                value={this.props.school}
-                onChange={this.handleChange}
-              />
-            </label>
-            <label>
-              Location:
-              <input
-                name="genInfoLocationEdit"
-                type="text"
-                value={this.props.location}
-                onChange={this.handleChange}
-              />
-            </label>
-            <input type="submit" value="Submit" />
-          </form>
+  return (
+    <div className="popup-wrapper">
+      <div className="popup">
+        <div className="popup-top">
+          <h1>Edit Intro</h1>
+          <Close onClick={handleClose} />
         </div>
+        <form className="general-info-form" onSubmit={handleSubmit}>
+          <label>
+            Name:
+            <input
+              name="name"
+              type="text"
+              value={props.name}
+              onChange={handleChange}
+            />
+          </label>
+          <label>
+            Headline:
+            <input
+              name="headline"
+              type="text"
+              value={props.headline}
+              onChange={handleChange}
+            />
+          </label>
+          <label>
+            School:
+            <input
+              name="school"
+              type="text"
+              value={props.school}
+              onChange={handleChange}
+            />
+          </label>
+          <label>
+            Location:
+            <input
+              name="location"
+              type="text"
+              value={props.location}
+              onChange={handleChange}
+            />
+          </label>
+          <input type="submit" value="Submit" />
+        </form>
       </div>
-    );
-  }
+    </div>
+  );
 }

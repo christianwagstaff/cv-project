@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import Edit from "./icons/Edit";
+import GeneralInfoPopup from "./forms/GeneralInfoPopup";
 
 const Card = (props) => {
   return <div className="card rounded">{props.children}</div>;
@@ -20,26 +21,80 @@ const School = (props) => {
 const Location = (props) => {
   return <div className="location left-indent">{props.location}</div>;
 };
-export default class GenInfoCard extends React.Component {
-  constructor(props) {
-    super(props);
-    this.handleEdit = this.handleEdit.bind(this);
+
+export default function GenInfoCard() {
+  const [showEdit, setShowEdit] = useState(false);
+  const [name, setName] = useState("Christian Wagstaff");
+  const [headline, setHeadline] = useState("A Headline Here");
+  const [school, setSchool] = useState("CSUCI");
+  const [location, setLocation] = useState("Ventura, CA");
+
+  function toggleEdit() {
+    setEditHeadline(headline);
+    setEditLocation(location);
+    setEditName(name);
+    setEditSchool(school);
+    setShowEdit(!showEdit);
   }
-  handleEdit() {
-    this.props.onEditClick("genInfo");
+  const [editName, setEditName] = useState("Christian Wagstaff");
+  const [editHeadline, setEditHeadline] = useState("A Headline Here");
+  const [editSchool, setEditSchool] = useState("CSUCI");
+  const [editLocation, setEditLocation] = useState("Ventura, CA");
+
+  const defaultGenEdit = {
+    name: editName,
+    headline: editHeadline,
+    school: editSchool,
+    location: editLocation,
+  };
+
+  function submitEdit(e) {
+    e.preventDefault();
+    setName(editName);
+    setHeadline(editHeadline);
+    setSchool(editSchool);
+    setLocation(editLocation);
+    setShowEdit(false);
   }
 
-  render() {
-    return (
+  function editInfo(e) {
+    switch (e.name) {
+      case "name":
+        setEditName(e.value);
+        break;
+      case "headline":
+        setEditHeadline(e.value);
+        break;
+      case "school":
+        setEditSchool(e.value);
+        break;
+      case "location":
+        setEditLocation(e.value);
+        break;
+      default:
+        console.log(e.name);
+    }
+  }
+
+  return (
+    <div>
       <Card>
         <div className="card-content">
-          <Name name={this.props.name} />
-          <Headline headline={this.props.headline} />
-          <School school={this.props.school} />
-          <Location location={this.props.location} />
+          <Name name={name} />
+          <Headline headline={headline} />
+          <School school={school} />
+          <Location location={location} />
         </div>
-        <Edit onClick={this.handleEdit} />
+        <Edit onClick={toggleEdit} />
       </Card>
-    );
-  }
+      {showEdit ? (
+        <GeneralInfoPopup
+          {...defaultGenEdit}
+          onCloseClick={toggleEdit}
+          onChange={editInfo}
+          onSubmit={submitEdit}
+        />
+      ) : null}
+    </div>
+  );
 }
