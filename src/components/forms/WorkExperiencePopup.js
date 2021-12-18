@@ -21,50 +21,52 @@ export default class WorkExperienceForm extends React.Component {
 
   render() {
     return (
-      <div className="popup">
-        <div className="popup-top">
-          <h1>Add New Work Experience</h1>
-          <Close onClick={this.handleClose} />
+      <div className="popup-wrapper">
+        <div className="popup">
+          <div className="popup-top">
+            <h1>Add New Work Experience</h1>
+            <Close onClick={this.handleClose} />
+          </div>
+          <form className="general-info-form" onSubmit={this.handleSubmit}>
+            <label>
+              Job Title:
+              <input
+                name="newJobTitle"
+                type="text"
+                value={this.props.title}
+                onChange={this.handleChange}
+              />
+            </label>
+            <label>
+              Business:
+              <input
+                name="newJobLocation"
+                type="text"
+                value={this.props.location}
+                onChange={this.handleChange}
+              />
+            </label>
+            <label>
+              Years Worked:
+              <input
+                name="newJobYears"
+                type="text"
+                value={this.props.years}
+                onChange={this.handleChange}
+              />
+            </label>
+            <label>
+              Describe Basic Job Duties:
+              <input
+                name="newJobDescription"
+                type="text"
+                value={this.props.description}
+                onChange={this.handleChange}
+              />
+            </label>
+            <input type="submit" value="Submit" />
+          </form>
         </div>
-        <form className="general-info-form" onSubmit={this.handleSubmit}>
-          <label>
-            Job Title:
-            <input
-              name="newJobTitle"
-              type="text"
-              value={this.props.title}
-              onChange={this.handleChange}
-            />
-          </label>
-          <label>
-            Business:
-            <input
-              name="newJobLocation"
-              type="text"
-              value={this.props.location}
-              onChange={this.handleChange}
-            />
-          </label>
-          <label>
-            Years Worked:
-            <input
-              name="newJobYears"
-              type="text"
-              value={this.props.years}
-              onChange={this.handleChange}
-            />
-          </label>
-          <label>
-            Describe Basic Job Duties:
-            <input
-              name="newJobDescription"
-              type="text"
-              value={this.props.description}
-              onChange={this.handleChange}
-            />
-          </label>
-          <input type="submit" value="Submit" />
-        </form>
       </div>
     );
   }

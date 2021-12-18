@@ -20,23 +20,25 @@ export default class AboutForm extends React.Component {
 
   render() {
     return (
-      <div className="popup">
-        <div className="popup-top">
-          <h1>Edit About</h1>
-          <Close onClick={this.handleClose} />
+      <div className="popup-wrapper">
+        <div className="popup">
+          <div className="popup-top">
+            <h1>Edit About</h1>
+            <Close onClick={this.handleClose} />
+          </div>
+          <form className="about-form" onSubmit={this.handleSubmit}>
+            <label>
+              About:
+              <textarea
+                rows="10"
+                name="aboutEdit"
+                value={this.props.about}
+                onChange={this.handleChange}
+              />
+            </label>
+            <input type="submit" value="Submit" />
+          </form>
         </div>
-        <form className="about-form" onSubmit={this.handleSubmit}>
-          <label>
-            About:
-            <textarea
-              rows="10"
-              name="aboutEdit"
-              value={this.props.about}
-              onChange={this.handleChange}
-            />
-          </label>
-          <input type="submit" value="Submit" />
-        </form>
       </div>
     );
   }

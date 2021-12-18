@@ -20,6 +20,20 @@ const Skill = (props) => {
 };
 
 export default class Skills extends React.Component {
+  constructor() {
+    super();
+    this.editSkill = this.editSkill.bind(this);
+    this.deleteSkill = this.deleteSkill.bind(this);
+  }
+
+  editSkill(id) {
+    this.props.editSkill(id);
+  }
+
+  deleteSkill(id) {
+    this.props.deleteSkill(id);
+  }
+
   render() {
     return (
       <Card>
@@ -33,7 +47,14 @@ export default class Skills extends React.Component {
           {[...this.props.skillList].map((skill) => {
             let key = skill.id;
             let title = skill.skill;
-            return <Skill key={key} skill={title} />;
+            return (
+              <Skill
+                key={key}
+                skill={title}
+                deleteSkill={() => this.deleteSkill(key)}
+                editSkill={() => this.editSkill(key)}
+              />
+            );
           })}
         </div>
       </Card>

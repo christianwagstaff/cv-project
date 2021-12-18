@@ -62,6 +62,7 @@ export default class App extends React.Component {
         { skill: "Skill2", id: uniqid() },
         { skill: "Skill3", id: uniqid() },
       ],
+      newSkill: "",
     };
   }
 
@@ -183,6 +184,18 @@ export default class App extends React.Component {
     }
   }
 
+  editSkill = (id) => {
+    const selected = this.state.skillList.filter((skill) => skill.id === id)[0];
+    console.log(selected);
+  };
+
+  deleteSkill = (id) => {
+    const selected = this.state.skillList.filter((skill) => skill.id === id)[0];
+    console.log(selected);
+  };
+
+  addSkill = () => {};
+
   editWorkExperience = (id) => {
     const selectedJob = this.state.workExperience.filter(
       (job) => job.id === id
@@ -267,7 +280,12 @@ export default class App extends React.Component {
             onSubmit={this.handleSubmitEditJob}
           />
         )}
-        <Skills skillList={this.state.skillList} />
+        <Skills
+          skillList={this.state.skillList}
+          editSkill={this.editSkill}
+          deleteSkill={this.deleteSkill}
+          addSkill={this.addSkill}
+        />
       </div>
     );
   }
