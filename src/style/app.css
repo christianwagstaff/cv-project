@@ -6,6 +6,12 @@ html, body {
     background-color: gainsboro;
 }
 
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 h1 {
     font-size: 24px;
 }
@@ -127,4 +133,11 @@ h1 {
 
 .about {
     white-space: pre-line;
+}
+
+@media screen and (min-width: 600px){
+    .App {
+        width: 600px;
+        padding-top: 12px;
+    }
 }
