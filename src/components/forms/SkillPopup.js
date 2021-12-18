@@ -9,7 +9,7 @@ export default class SkillForm extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
   handleClose() {
-    this.props.onCloseClick("skill");
+    this.props.onCloseClick(this.props.popupName);
   }
   handleChange(e) {
     this.props.onChange(e);

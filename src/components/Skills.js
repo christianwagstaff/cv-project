@@ -32,6 +32,7 @@ export default class Skills extends React.Component {
   }
 
   editSkill(id) {
+    this.props.addSkill("editSkill");
     this.props.editSkill(id);
   }
 

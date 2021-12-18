@@ -21,7 +21,8 @@ export default class App extends React.Component {
       showHideAbout: false,
       showHideExperience: false,
       showHideEditExperience: false,
-      showHideSkill: false,
+      showHideAddSkill: false,
+      showHideEditSkill: false,
       genInfoName: "Christian Wagstaff",
       genInfoNameEdit: "Christian Wagstaff",
       genInfoHeadline: "A Headline Here",
@@ -65,6 +66,7 @@ export default class App extends React.Component {
         { skill: "Skill3", id: uniqid() },
       ],
       newSkill: "",
+      editSkillId: "",
     };
   }
 
@@ -143,6 +145,18 @@ export default class App extends React.Component {
     this.hideComponent("skill");
   };
 
+  handleSubmitEditSkill = (e) => {
+    e.preventDefault();
+    const oldArray = this.state.skillList;
+    const id = this.state.editSkillId;
+    const updated = { skill: this.state.newSkill, id: id };
+    const selectedIndex = oldArray.findIndex((job) => job.id === id);
+    this.setState({
+      skillList: replaceAt(oldArray, selectedIndex, updated),
+    });
+    this.hideComponent("editSkill");
+  };
+
   handleSubmitNewJob = (e) => {
     e.preventDefault();
     const title = this.state.newJobTitle;
@@ -195,7 +209,10 @@ export default class App extends React.Component {
         });
         break;
       case "skill":
-        this.setState({ showHideSkill: !this.state.showHideSkill });
+        this.setState({ showHideAddSkill: !this.state.showHideAddSkill });
+        break;
+      case "editSkill":
+        this.setState({ showHideEditSkill: !this.state.showHideEditSkill });
         break;
       default:
         Error("HideShow went wrong.");
@@ -205,6 +222,11 @@ export default class App extends React.Component {
   editSkill = (id) => {
     const selected = this.state.skillList.filter((skill) => skill.id === id)[0];
     console.log(selected);
+    const skill = selected.skill;
+    this.setState({
+      newSkill: skill,
+      editSkillId: id,
+    });
   };
 
   deleteSkill = (id) => {
@@ -228,7 +250,7 @@ export default class App extends React.Component {
     const description = selectedJob.description;
     const location = selectedJob.location;
     this.setState({
-      editJobId: selectedJob.id,
+      editJobId: id,
       editJobTitle: title,
       editJobLocation: location,
       editJobYears: years,
@@ -309,11 +331,21 @@ export default class App extends React.Component {
           deleteSkill={this.deleteSkill}
           addSkill={this.hideComponent}
         />
-        {this.state.showHideSkill && (
+        {this.state.showHideAddSkill && (
           <SkillForm
             onCloseClick={this.hideComponent}
+            popupName="skill"
             onChange={this.handleChange}
             onSubmit={this.handleSubmitNewSkill}
+          />
+        )}
+        {this.state.showHideEditSkill && (
+          <SkillForm
+            skill={this.state.newSkill}
+            onCloseClick={this.hideComponent}
+            popupName="editSkill"
+            onChange={this.handleChange}
+            onSubmit={this.handleSubmitEditSkill}
           />
         )}
       </div>
