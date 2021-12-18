@@ -10,6 +10,7 @@ import WorkExperienceCard from "./components/WorkExperienceCard";
 import WorkExperienceForm from "./components/forms/WorkExperiencePopup";
 import WorkExperienceEditForm from "./components/forms/WorkExperienceEditPopup";
 import Skills from "./components/Skills";
+import SkillForm from "./components/forms/SkillPopup";
 
 export default class App extends React.Component {
   constructor() {
@@ -20,6 +21,7 @@ export default class App extends React.Component {
       showHideAbout: false,
       showHideExperience: false,
       showHideEditExperience: false,
+      showHideSkill: false,
       genInfoName: "Christian Wagstaff",
       genInfoNameEdit: "Christian Wagstaff",
       genInfoHeadline: "A Headline Here",
@@ -100,9 +102,6 @@ export default class App extends React.Component {
   handleDeleteJob = (id) => {
     const oldArray = this.state.workExperience;
     const selectedIndex = oldArray.findIndex((job) => job.id === id);
-    // this.setState({
-    //   workExperience: replaceAt(oldArray, selectedIndex, ""),
-    // });
     const newArray = [
       ...oldArray.slice(0, selectedIndex),
       ...oldArray.slice(selectedIndex + 1),
@@ -134,6 +133,16 @@ export default class App extends React.Component {
     this.hideComponent("editExperience");
   };
 
+  handleSubmitNewSkill = (e) => {
+    e.preventDefault();
+    const newSkill = { skill: this.state.newSkill, id: uniqid() };
+    this.setState({
+      skillList: [...this.state.skillList, newSkill],
+    });
+    this.clearNewJob();
+    this.hideComponent("skill");
+  };
+
   handleSubmitNewJob = (e) => {
     e.preventDefault();
     const title = this.state.newJobTitle;
@@ -153,6 +162,12 @@ export default class App extends React.Component {
     this.hideComponent("experience");
     this.clearNewJob();
   };
+
+  clearNewSkill() {
+    this.setState({
+      newSkill: "",
+    });
+  }
 
   clearNewJob() {
     this.setState({
@@ -179,6 +194,9 @@ export default class App extends React.Component {
           showHideEditExperience: !this.state.showHideEditExperience,
         });
         break;
+      case "skill":
+        this.setState({ showHideSkill: !this.state.showHideSkill });
+        break;
       default:
         Error("HideShow went wrong.");
     }
@@ -190,11 +208,16 @@ export default class App extends React.Component {
   };
 
   deleteSkill = (id) => {
-    const selected = this.state.skillList.filter((skill) => skill.id === id)[0];
-    console.log(selected);
+    const oldArray = this.state.skillList;
+    const selectedIndex = oldArray.findIndex((skill) => skill.id === id);
+    const newArray = [
+      ...oldArray.slice(0, selectedIndex),
+      ...oldArray.slice(selectedIndex + 1),
+    ];
+    this.setState({
+      skillList: newArray,
+    });
   };
-
-  addSkill = () => {};
 
   editWorkExperience = (id) => {
     const selectedJob = this.state.workExperience.filter(
@@ -284,8 +307,15 @@ export default class App extends React.Component {
           skillList={this.state.skillList}
           editSkill={this.editSkill}
           deleteSkill={this.deleteSkill}
-          addSkill={this.addSkill}
+          addSkill={this.hideComponent}
         />
+        {this.state.showHideSkill && (
+          <SkillForm
+            onCloseClick={this.hideComponent}
+            onChange={this.handleChange}
+            onSubmit={this.handleSubmitNewSkill}
+          />
+        )}
       </div>
     );
   }

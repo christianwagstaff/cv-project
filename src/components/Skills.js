@@ -24,6 +24,11 @@ export default class Skills extends React.Component {
     super();
     this.editSkill = this.editSkill.bind(this);
     this.deleteSkill = this.deleteSkill.bind(this);
+    this.addSkill = this.addSkill.bind(this);
+  }
+
+  addSkill() {
+    this.props.addSkill("skill");
   }
 
   editSkill(id) {
@@ -40,7 +45,7 @@ export default class Skills extends React.Component {
         <div className="card-top">
           <h1>Skills</h1>
           <div className="button-list">
-            <Plus />
+            <Plus onClick={this.addSkill} />
           </div>
         </div>
         <div className="experienceList">
