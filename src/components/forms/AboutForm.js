@@ -1,45 +1,37 @@
 import React from "react";
 import Close from "../icons/Close";
 
-export default class AboutForm extends React.Component {
-  constructor() {
-    super();
-    this.handleClose = this.handleClose.bind(this);
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+export default function AboutForm(props) {
+  function handleClose() {
+    props.onCloseClick();
   }
-  handleClose() {
-    this.props.onCloseClick("about");
+  function handleChange(e) {
+    props.onChange(e);
   }
-  handleChange(e) {
-    this.props.onChange(e);
-  }
-  handleSubmit(e) {
-    this.props.onSubmit(e);
+  function handleSubmit(e) {
+    props.onSubmit(e);
   }
 
-  render() {
-    return (
-      <div className="popup-wrapper">
-        <div className="popup">
-          <div className="popup-top">
-            <h1>Edit About</h1>
-            <Close onClick={this.handleClose} />
-          </div>
-          <form className="about-form" onSubmit={this.handleSubmit}>
-            <label>
-              About:
-              <textarea
-                rows="10"
-                name="aboutEdit"
-                value={this.props.about}
-                onChange={this.handleChange}
-              />
-            </label>
-            <input type="submit" value="Submit" />
-          </form>
+  return (
+    <div className="popup-wrapper">
+      <div className="popup">
+        <div className="popup-top">
+          <h1>Edit About</h1>
+          <Close onClick={handleClose} />
         </div>
+        <form className="about-form" onSubmit={handleSubmit}>
+          <label>
+            About:
+            <textarea
+              rows="10"
+              name="aboutEdit"
+              value={props.about}
+              onChange={handleChange}
+            />
+          </label>
+          <input type="submit" value="Submit" />
+        </form>
       </div>
-    );
-  }
+    </div>
+  );
 }

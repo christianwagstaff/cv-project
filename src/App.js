@@ -5,7 +5,6 @@ import uniqid from "uniqid";
 import GeneralInfoPopup from "./components/forms/GeneralInfoPopup";
 import GenInfoCard from "./components/GeneralInfoCard.js";
 import About from "./components/About";
-import AboutForm from "./components/forms/AboutForm";
 import WorkExperienceCard from "./components/WorkExperienceCard";
 import WorkExperienceForm from "./components/forms/WorkExperiencePopup";
 import WorkExperienceEditForm from "./components/forms/WorkExperienceEditPopup";
@@ -18,7 +17,6 @@ export default class App extends React.Component {
     this.hideComponent = this.hideComponent.bind(this);
     this.state = {
       showHideGenInfo: false,
-      showHideAbout: false,
       showHideExperience: false,
       showHideEditExperience: false,
       showHideAddSkill: false,
@@ -31,10 +29,6 @@ export default class App extends React.Component {
       genInfoSchoolEdit: "CSUCI",
       genInfoLocation: "Ventura, CA",
       genInfoLocationEdit: "Ventura, CA",
-      about:
-        "Skilled Problem Solver, with a demonstrated history of developing data pipelines to efficiently track sales data in a multi billion dollar bank. Strong multitasker and communicator, Created a data warehouse to track all loan processes, from application to boarding. Skilled Mathematician, with a long background in training and teaching. ",
-      aboutEdit:
-        "Skilled Problem Solver, with a demonstrated history of developing data pipelines to efficiently track sales data in a multi billion dollar bank. Strong multitasker and communicator, Created a data warehouse to track all loan processes, from application to boarding. Skilled Mathematician, with a long background in training and teaching. ",
       workExperience: [
         {
           id: uniqid(),
@@ -294,15 +288,7 @@ export default class App extends React.Component {
             onSubmit={this.handleSubmitGenInfo}
           />
         )}
-        <About onEditClick={this.hideComponent} about={this.state.about} />
-        {this.state.showHideAbout && (
-          <AboutForm
-            about={this.state.aboutEdit}
-            onCloseClick={this.hideComponent}
-            onChange={this.handleChange}
-            onSubmit={this.handleSubmitAbout}
-          />
-        )}
+        <About />
         <WorkExperienceCard
           onEditClick={this.hideComponent}
           jobList={this.state.workExperience}
