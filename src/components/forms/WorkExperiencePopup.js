@@ -2,72 +2,64 @@ import React from "react";
 import "../../style/popup.css";
 import Close from "../icons/Close";
 
-export default class WorkExperienceForm extends React.Component {
-  constructor() {
-    super();
-    this.handleClose = this.handleClose.bind(this);
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+export default function WorkExperienceForm(props) {
+  function handleClose() {
+    props.onCloseClick();
   }
-  handleClose() {
-    this.props.onCloseClick("experience");
+  function handleChange(e) {
+    props.onChange(e);
   }
-  handleChange(e) {
-    this.props.onChange(e);
-  }
-  handleSubmit(e) {
-    this.props.onSubmit(e);
+  function handleSubmit(e) {
+    props.onSubmit(e);
   }
 
-  render() {
-    return (
-      <div className="popup-wrapper">
-        <div className="popup">
-          <div className="popup-top">
-            <h1>Add New Work Experience</h1>
-            <Close onClick={this.handleClose} />
-          </div>
-          <form className="general-info-form" onSubmit={this.handleSubmit}>
-            <label>
-              Job Title:
-              <input
-                name="newJobTitle"
-                type="text"
-                value={this.props.title}
-                onChange={this.handleChange}
-              />
-            </label>
-            <label>
-              Business:
-              <input
-                name="newJobLocation"
-                type="text"
-                value={this.props.location}
-                onChange={this.handleChange}
-              />
-            </label>
-            <label>
-              Years Worked:
-              <input
-                name="newJobYears"
-                type="text"
-                value={this.props.years}
-                onChange={this.handleChange}
-              />
-            </label>
-            <label>
-              Describe Basic Job Duties:
-              <input
-                name="newJobDescription"
-                type="text"
-                value={this.props.description}
-                onChange={this.handleChange}
-              />
-            </label>
-            <input type="submit" value="Submit" />
-          </form>
+  return (
+    <div className="popup-wrapper">
+      <div className="popup">
+        <div className="popup-top">
+          <h1>{props.popupTitle}</h1>
+          <Close onClick={handleClose} />
         </div>
+        <form className="general-info-form" onSubmit={handleSubmit}>
+          <label>
+            Job Title:
+            <input
+              name="title"
+              type="text"
+              value={props.title}
+              onChange={handleChange}
+            />
+          </label>
+          <label>
+            Business:
+            <input
+              name="location"
+              type="text"
+              value={props.location}
+              onChange={handleChange}
+            />
+          </label>
+          <label>
+            Years Worked:
+            <input
+              name="years"
+              type="text"
+              value={props.years}
+              onChange={handleChange}
+            />
+          </label>
+          <label>
+            Describe Basic Job Duties:
+            <input
+              name="description"
+              type="text"
+              value={props.description}
+              onChange={handleChange}
+            />
+          </label>
+          <input type="submit" value="Submit" />
+        </form>
       </div>
-    );
-  }
+    </div>
+  );
 }
