@@ -35,6 +35,7 @@ export default function Skills() {
   function editSkill(id) {
     const selected = skillList.filter((skill) => skill.id === id)[0];
     const skill = selected.skill;
+    console.log(skill);
     setNewSkill(skill);
     setSkillId(id);
     toggleSkill("edit");
@@ -117,6 +118,7 @@ export default function Skills() {
       ) : null}
       {showEditSkill ? (
         <SkillForm
+          skill={newSkill}
           onCloseClick={() => toggleSkill("edit")}
           popupName="Edit Skill"
           onChange={handleChange}
